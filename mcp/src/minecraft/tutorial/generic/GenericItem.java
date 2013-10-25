@@ -1,5 +1,10 @@
 package tutorial.generic;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,8 +36,38 @@ public class GenericItem extends Item {
          */
         public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int bx, int by, int bz, int side, float px, float py, float pz)
         {
-    		return buildBox(world, 5, bx, by+1, bz, Block.stone.blockID);    		
+    		//return buildBox(world, 5, bx, by+1, bz, Block.stone.blockID);   
+        	return readBox(world, bx, by+1, bz, "box.txt"); 
     	}
+                
+        public boolean readBox(World world, int bx, int by, int bz, String filename)
+        {
+        	try
+        	{
+				FileInputStream fstream = new FileInputStream(filename);
+				DataInputStream in = new DataInputStream(fstream);
+				BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				String strLine;
+				while ((strLine = br.readLine()) != null)   
+				{
+					String[] args = strLine.split(" ");
+					int blockID = Integer.parseInt(args[0]);
+					int x = Integer.parseInt(args[1]);
+					int y = Integer.parseInt(args[2]);
+					int z = Integer.parseInt(args[3]);
+					world.setBlock(x+bx, y+by, z+bz, blockID);
+				}
+				
+				in.close();
+			}
+    		catch (Exception e)
+    		{
+    			System.err.println("Error: " + e.getMessage());
+			}
+        	
+    	return true;
+    	
+        }
         
         public boolean buildBox(World world, int dim, int bx, int by, int bz, int blockID)
         {
@@ -43,10 +78,12 @@ public class GenericItem extends Item {
         			for (int y = 0; y < dim; y++)
         			{
         				if (x == 0 || z == 0 || x == dim - 1 || z == dim - 1 || y == dim - 1)
-        					world.setBlock(x+bx, y+by, z+bz, blockID);
+        					{
+        						world.setBlock(x+bx, y+by, z+bz, blockID);
+        					}
         			}
         		}
         	}
         	return true;
-        }
+        }        
 }
