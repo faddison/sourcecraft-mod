@@ -15,7 +15,7 @@ public class CityFileGenerator {
 	{
 		// TODO Auto-generated method stub
 		PrintWriter writer = new PrintWriter("box.txt", "UTF-8");
-		generateBox(5, writer);
+		generateBox(25, writer);
 		writer.close();
 	}
 	
