@@ -8,6 +8,8 @@ import java.lang.Math;
 
 public class CityFileGenerator {
 
+	private static int total_blocks = 0;
+	
 	/**
 	 * @param args
 	 * @throws UnsupportedEncodingException 
@@ -15,7 +17,7 @@ public class CityFileGenerator {
 	 */
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException 
 	{
-		PrintWriter writer = new PrintWriter("box-log-0-20.txt", "UTF-8");
+		PrintWriter writer = new PrintWriter("box.txt", "UTF-8");
 		ArrayList<ClassProperties> classes = Parser.parse();
 		//Parser p = new Parser();
 		//p.parse(classes);
@@ -23,20 +25,21 @@ public class CityFileGenerator {
 		generateGrid(classes, writer);
 		//generateBox(25, writer);
 		writer.close();
+		System.out.println(total_blocks);
 	}
 	public static int findLargestItem(ArrayList<ClassProperties> classList){
 		int length = classList.size();
 		int max = 0;
 		for (int i = 0; i < length; i++){
-			if (max < classList.get(i).getNumAttributes())
-				max = classList.get(i).getNumAttributes();
+			if (max < Math.log(classList.get(i).getNumAttributes()))
+				max = (int) Math.log(classList.get(i).getNumAttributes());
 		}
 		return max;
 	}
 
 	public static void generateGrid(ArrayList<ClassProperties> classList, PrintWriter writer){
 
-		classList = new ArrayList<ClassProperties>(classList.subList(0, 20));
+		classList = new ArrayList<ClassProperties>(classList.subList(0, 100));
 		
 		// cell size is based off of the largest attribute number
 		int cellSize = findLargestItem(classList) + 1;
@@ -58,8 +61,9 @@ public class CityFileGenerator {
 		{
 			for (int j = 0; j < gridSide; j += cellSize)
 			{
-				if (classList.size() > counter)
+				if (counter < classList.size())
 				{
+					System.out.println("Building structure "+(counter+1));
 					generateBuilding(classList, counter, i, j, writer);
 					counter++;
 				}
@@ -77,13 +81,13 @@ public class CityFileGenerator {
 
 			// get a class and return its method and attributes
 			ClassProperties c = classList.get(gridNum);
-			int attr = c.getNumAttributes() + 1;
-			int meth = c.getNumMethods();
+			//int attr = c.getNumAttributes() + 1;
+			//int meth = c.getNumMethods();
 			//System.out.println(attr);
 			//System.out.println(meth);
 			//System.exit(0);
-			//int attr = (int) Math.log(c.getNumAttributes());
-			//int meth = (int) Math.log(c.getNumMethods());
+			int attr = (int) Math.log(c.getNumAttributes());
+			int meth = (int) Math.log(c.getNumMethods());
 
 			// maxHeight is meth + 4 because flat ground starts at y = 4
 			int maxHeight = meth + 4;
@@ -98,7 +102,8 @@ public class CityFileGenerator {
 							if (i == maxHeight - 1 || j == x || j == attr + x - 1 || k == z || k == attr + z - 1)
 							{
 								writer.print(String.format("%d %d %d %d\n", 1, j, i, k));
-								System.out.println(String.format("%d %d %d %d", 1, j, i, k));
+								total_blocks++;
+								//System.out.println(String.format("%d %d %d %d", 1, j, i, k));
 							}
 							//ModLoader.getMinecraftInstance().setBlockWithNotify(j, i, k, Block.blockDiamond.blockID);
 						}
