@@ -26,6 +26,7 @@ public class CityMapGenerator {
 	
 	public static ArrayList<Point> readCity(String filename)
     {
+		System.out.println(String.format("Reading %s", filename));
 		ArrayList<Point> list = new ArrayList<Point>();
 		int xMax = 0;
 		int zMax = 0;
@@ -44,12 +45,14 @@ public class CityMapGenerator {
 				int x = Integer.parseInt(args[1]);
 				int y = Integer.parseInt(args[2]);
 				int z = Integer.parseInt(args[3]);
-				
-				list.add(new Point(x, z));
-				if (x > xMax) xMax = x;
-				if (z > zMax) zMax = z;
-				
-				System.out.println(String.format("New point: %d, %d", x, z));
+				Point p = new Point(x,z);
+				if (!list.contains(p))
+				{
+					list.add(new Point(x, z));
+					if (x > xMax) xMax = x;
+					if (z > zMax) zMax = z;
+				}
+				//System.out.println(String.format("New point: %d, %d", x, z));
 			}
 			
 			in.close();
@@ -67,6 +70,7 @@ public class CityMapGenerator {
 	
 	public static void writeCity(ArrayList<Point> list, String outputfile)
 	{
+		System.out.println(String.format("Wrtiting %s", outputfile));
 		try 
 		{
 			PrintWriter writer = new PrintWriter(outputfile, "UTF-8");
@@ -75,6 +79,7 @@ public class CityMapGenerator {
 			
 			for (int i = 0; i < max.x; i++)
 			{
+				System.out.println(String.format("Constructing row %d",i));
 				for (int j = 0; j < max.y; j++)
 				{
 					Point coord = new Point(i,j);
@@ -85,7 +90,7 @@ public class CityMapGenerator {
 				}
 				writer.println();
 			}
-			
+			writer.print(String.format("\nx, y : %d, %d",max.x, max.y));
 			writer.close();
 			
 		} catch (Exception e) {

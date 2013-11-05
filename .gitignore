@@ -4,6 +4,8 @@
 *.war
 *.ear
 mcp/eclipse/.metadata/*
-
-
+*.log
+*.log.*
+mcp/jars/saves/*
+mcp/jars/stats/*
 
