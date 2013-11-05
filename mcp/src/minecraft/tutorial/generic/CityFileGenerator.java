@@ -39,7 +39,7 @@ public class CityFileGenerator {
 
 	public static void generateGrid(ArrayList<ClassProperties> classList, PrintWriter writer){
 
-		classList = new ArrayList<ClassProperties>(classList.subList(0, 100));
+		classList = new ArrayList<ClassProperties>(classList.subList(0, 10));
 		
 		// cell size is based off of the largest attribute number
 		int cellSize = findLargestItem(classList) + 1;

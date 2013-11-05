@@ -30,6 +30,8 @@ public class Generic {
         public static Generic instance;
 
         private static Item genericItem;
+        
+        public static SourcecraftWorldGenerator sourcecraftWorldGenerator;
 
         @SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
                         serverSide="tutorial.generic.CommonProxy")
@@ -38,11 +40,13 @@ public class Generic {
         @EventHandler
         public void preInit(FMLPreInitializationEvent event) {
                 genericItem = new GenericItem(5000);
+                sourcecraftWorldGenerator = new SourcecraftWorldGenerator();
         }
         
         @EventHandler
         public void load(FMLInitializationEvent event) {
                 LanguageRegistry.addName(genericItem, "Generic Item");
+                GameRegistry.registerWorldGenerator(sourcecraftWorldGenerator);
         }
         
         @EventHandler
