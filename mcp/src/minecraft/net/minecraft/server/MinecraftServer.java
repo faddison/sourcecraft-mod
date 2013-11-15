@@ -3,6 +3,7 @@ package net.minecraft.server;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import tutorial.generic.SourcecraftWorldGenerator;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ICommandSender;
@@ -54,7 +57,6 @@ import net.minecraft.world.demo.DemoWorldServer;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.WorldEvent;
@@ -294,6 +296,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 worldserver.theChunkProviderServer.loadChunk(chunkcoordinates.posX + k >> 4, chunkcoordinates.posZ + l >> 4);
             }
         }
+        SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
+        worldgen.readBox(worldserver, 0, 0, 0, "box-new.txt");
 
         this.clearCurrentTask();
     }

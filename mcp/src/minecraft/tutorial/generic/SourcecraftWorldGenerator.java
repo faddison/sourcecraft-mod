@@ -18,9 +18,11 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
 		@Override
 		public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 		{
+			/*
 			if (!(count > 0))
-				readBox(world, 0, 0, 0, "box.txt"); 
+				readBox(world, 0, 0, 0, "box-new.txt"); 
 			count++;
+			*/
 			
 		}
 
@@ -32,6 +34,7 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine;
+				int lines = 0;
 				while ((strLine = br.readLine()) != null)   
 				{
 					String[] args = strLine.split(" ");
@@ -39,8 +42,9 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
 					int x = Integer.parseInt(args[1]);
 					int y = Integer.parseInt(args[2]);
 					int z = Integer.parseInt(args[3]);
-					world.setBlock(x+bx, y+by, z+bz, blockID);
-					System.out.println(String.format("Setting block: %d, %d, %d", x, y, z));
+					world.setBlock(x+bx, y+by+4, z+bz, blockID);
+					System.out.println(String.format("Setting block %d: %d, %d, %d",lines, x, y, z));
+					lines++;
 				}
 				
 				in.close();

@@ -31,7 +31,7 @@ public class Generic {
 
         private static Item genericItem;
         
-        public static SourcecraftWorldGenerator sourcecraftWorldGenerator;
+        public static SourcecraftWorldGenerator sourcecraftWorldGenerator = new SourcecraftWorldGenerator();
 
         @SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
                         serverSide="tutorial.generic.CommonProxy")

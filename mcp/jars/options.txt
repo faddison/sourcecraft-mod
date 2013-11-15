@@ -1,4 +1,4 @@
-music:1.0
+music:0.0
 sound:1.0
 invertYMouse:false
 mouseSensitivity:0.5
@@ -10,7 +10,7 @@ particles:0
 bobView:true
 anaglyph3d:false
 advancedOpengl:false
-fpsLimit:1
+fpsLimit:0
 difficulty:2
 fancyGraphics:true
 ao:2
@@ -25,7 +25,7 @@ chatLinksPrompt:true
 chatOpacity:1.0
 serverTextures:true
 snooperEnabled:true
-fullscreen:true
+fullscreen:false
 enableVsync:true
 hideServerAddress:false
 advancedItemTooltips:false

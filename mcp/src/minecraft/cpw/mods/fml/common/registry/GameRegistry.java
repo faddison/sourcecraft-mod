@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 
+import tutorial.generic.SourcecraftWorldGenerator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -68,6 +69,7 @@ public class GameRegistry
     private static List<ICraftingHandler> craftingHandlers = Lists.newArrayList();
     private static List<IPickupNotifier> pickupHandlers = Lists.newArrayList();
     private static List<IPlayerTracker> playerTrackers = Lists.newArrayList();
+    public static int count = 0;
 
     /**
      * Register a world generator - something that inserts new block types into the world
