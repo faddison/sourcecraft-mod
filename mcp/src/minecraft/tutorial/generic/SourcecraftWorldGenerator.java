@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -18,11 +19,8 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
 		@Override
 		public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 		{
-			/*
-			if (!(count > 0))
-				readBox(world, 0, 0, 0, "box-new.txt"); 
-			count++;
-			*/
+			
+			//readBox(world, 0, 0, 0, "light-new.txt"); 
 			
 		}
 
@@ -42,7 +40,7 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
 					int x = Integer.parseInt(args[1]);
 					int y = Integer.parseInt(args[2]);
 					int z = Integer.parseInt(args[3]);
-					world.setBlock(x+bx, y+by+4, z+bz, blockID);
+					world.setBlock(x+bx, y+by+4, z+bz, blockID, 0, 2);
 					System.out.println(String.format("Setting block %d: %d, %d, %d",lines, x, y, z));
 					lines++;
 				}

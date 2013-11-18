@@ -279,6 +279,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         WorldServer worldserver = this.worldServers[b0];
         ChunkCoordinates chunkcoordinates = worldserver.getSpawnPoint();
         long j = getSystemTimeMillis();
+        
+        SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
+        worldgen.readBox(worldserver, 0, 0, 0, "light-new.txt");
 
         for (int k = -192; k <= 192 && this.isServerRunning(); k += 16)
         {
@@ -296,7 +299,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 worldserver.theChunkProviderServer.loadChunk(chunkcoordinates.posX + k >> 4, chunkcoordinates.posZ + l >> 4);
             }
         }
-        SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
+        //SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
         worldgen.readBox(worldserver, 0, 0, 0, "box-new.txt");
 
         this.clearCurrentTask();

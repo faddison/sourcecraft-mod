@@ -228,6 +228,8 @@ public class BlockTorch extends Block
      */
     protected boolean dropTorchIfCantStay(World par1World, int par2, int par3, int par4)
     {
+    	return true;
+    	/*
         if (!this.canPlaceBlockAt(par1World, par2, par3, par4))
         {
             if (par1World.getBlockId(par2, par3, par4) == this.blockID)
@@ -242,6 +244,7 @@ public class BlockTorch extends Block
         {
             return true;
         }
+        */
     }
 
     /**
