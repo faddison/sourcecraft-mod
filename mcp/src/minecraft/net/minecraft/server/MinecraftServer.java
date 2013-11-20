@@ -301,6 +301,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
         //SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
         worldgen.readBox(worldserver, 0, 0, 0, "box-new.txt");
+        worldgen.readBox(worldserver, 0, 0, 0, "rail-box.txt");
 
         this.clearCurrentTask();
     }
