@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -55,4 +56,61 @@ public class SourcecraftWorldGenerator implements IWorldGenerator {
     	return true;
     	
         }
+		
+		public boolean readClassBox(World world, int bx, int by, int bz, String filename)
+        {
+        	try
+        	{
+				FileInputStream fstream = new FileInputStream(filename);
+				DataInputStream in = new DataInputStream(fstream);
+				BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				String strLine;
+				int lines = 0;
+				while ((strLine = br.readLine()) != null)   
+				{
+					String[] args = strLine.split(" ");
+					
+					if (Integer.parseInt(args[0]) == 63) {
+						int blockID = Integer.parseInt(args[0]);
+						int x = Integer.parseInt(args[1]);
+						int y = Integer.parseInt(args[2]);
+						int z = Integer.parseInt(args[3]);
+						String className = args[4];
+
+						// Cut the .java portion out of each class name
+						String cutName = className.substring(0, className.indexOf('.'));
+
+						// Must set sign before able to modify text
+						world.setBlock(x+bx, y+by+4, z+bz, blockID, 0, 2);
+
+						// Modify sign text once it has been set
+						signPostWithText(world, cutName, x+bx, y+by+4, z+bz);
+						System.out.println(String.format("Setting block %d: %d, %d, %d",lines, x, y, z));
+						lines++;
+					}
+				}
+				
+				in.close();
+			}
+    		catch (Exception e)
+    		{
+    			System.err.println("Error: " + e.getMessage());
+			}
+        	
+    	return true;
+    	
+        }
+		
+	    public void signPostWithText(World world, String className, int x, int y, int z) {
+	    	
+	    	TileEntitySign sign = new TileEntitySign();
+	    	
+	    	// get the sign that has already been placed in the world
+	    	sign = (TileEntitySign) world.getBlockTileEntity(x, y, z);
+	    	
+	    	// signText is a String array with four indexes
+	    	sign.signText[0] = "CLASS NAME"; // line 1
+	    	sign.signText[2] =  className; // line 3
+	    	
+	    }
 }
