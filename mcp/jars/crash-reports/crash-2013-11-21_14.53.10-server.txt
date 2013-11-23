@@ -1,0 +1,64 @@
+---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 21/11/13 14:53
+Description: Sending packet
+
+java.lang.NullPointerException
+	at net.minecraft.network.MemoryConnection.processOrCachePacket(MemoryConnection.java:169)
+	at net.minecraft.network.MemoryConnection.addToSendQueue(MemoryConnection.java:57)
+	at net.minecraft.network.NetServerHandler.sendPacketToPlayer(NetServerHandler.java:669)
+	at net.minecraft.server.management.ServerConfigurationManager.updateTimeAndWeatherForPlayer(ServerConfigurationManager.java:929)
+	at net.minecraft.server.management.ServerConfigurationManager.initializeConnectionToPlayer(ServerConfigurationManager.java:134)
+	at net.minecraft.server.integrated.IntegratedServerListenThread.networkTick(IntegratedServerListenThread.java:97)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:699)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:595)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:492)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:16)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.network.MemoryConnection.processOrCachePacket(MemoryConnection.java:169)
+	at net.minecraft.network.MemoryConnection.addToSendQueue(MemoryConnection.java:57)
+
+-- Packet being sent --
+Details:
+	Packet ID: 4
+	Packet class: net.minecraft.network.packet.Packet4UpdateTime
+Stacktrace:
+	at net.minecraft.network.NetServerHandler.sendPacketToPlayer(NetServerHandler.java:669)
+	at net.minecraft.server.management.ServerConfigurationManager.updateTimeAndWeatherForPlayer(ServerConfigurationManager.java:929)
+	at net.minecraft.server.management.ServerConfigurationManager.initializeConnectionToPlayer(ServerConfigurationManager.java:134)
+	at net.minecraft.server.integrated.IntegratedServerListenThread.networkTick(IntegratedServerListenThread.java:97)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:699)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:595)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:129)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:492)
+	at net.minecraft.server.ThreadMinecraftServer.run(ThreadMinecraftServer.java:16)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.6.4
+	Operating System: Mac OS X (x86_64) version 10.6.8
+	Java Version: 1.6.0_65, Apple Inc.
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Apple Inc.
+	Memory: 775917952 bytes (739 MB) / 1069416448 bytes (1019 MB) up to 1069416448 bytes (1019 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 33643 (1884008 bytes; 1 MB) allocated, 33643 (1884008 bytes; 1 MB) used
+	Suspicious classes: FML and Forge are installed
+	IntCache: cache: 2, tcache: 0, allocated: 1, tallocated: 63
+	FML: MCP v8.11 FML v6.4.31.935 Minecraft Forge 9.11.1.935 4 mods loaded, 4 mods active
+	mcp{8.09} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	FML{6.4.31.935} [Forge Mod Loader] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Forge{9.11.1.935} [Minecraft Forge] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	generic{0.0.0} [Generic] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 5168 (289408 bytes; 0 MB) allocated, 5168 (289408 bytes; 0 MB) used
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

@@ -281,7 +281,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         long j = getSystemTimeMillis();
         
         SourcecraftWorldGenerator worldgen = new SourcecraftWorldGenerator();
-        //worldgen.readBox(worldserver, 0, 0, 0, "light-new.txt");
 
         for (int k = -192; k <= 192 && this.isServerRunning(); k += 16)
         {
